@@ -40,6 +40,8 @@
 
 ```
 .
+├── sql/init.sql            # 建表脚本 + 演示数据
+│
 ├── vue/big-event/          # 前端
 │   ├── src/
 │   │   ├── api/            # 接口封装
@@ -77,9 +79,22 @@
 - MySQL 8
 - Redis
 
-### 2. 建库
+### 2. 初始化数据库
 
-在 MySQL 中创建数据库 `big_event`（字符集 `utf8mb4`），并建好 `user`、`category`、`article` 三张表。
+仓库自带建表脚本 `sql/init.sql`，会创建 `big_event` 库、三张表和一份演示数据：
+
+```bash
+mysql -uroot -p < sql/init.sql
+```
+
+脚本会先删除同名表再重建，已存在的数据会被清空，请勿对生产库执行。
+
+演示账号：
+
+```
+用户名：demo123
+密码：  123456
+```
 
 ### 3. 改配置
 
@@ -105,6 +120,8 @@ server:
 cd demo/GongCheng1
 mvn spring-boot:run
 ```
+
+或用 IDEA 打开 `demo/GongCheng1`，运行 `GongCheng1Application`。
 
 后端跑在 `http://localhost:8082`。
 
