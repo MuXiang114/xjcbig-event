@@ -73,11 +73,17 @@
 
 ### 1. 准备环境
 
-- JDK 17+
+- JDK 17+（用 17 或 21 均可；JDK 26 与项目使用的 Lombok 版本不兼容，编译会失败）
 - Maven 3.6+
-- Node.js 18+
+- Node.js 22.18+（`package.json` 的 `engines` 已限定，Vite 8 需要）
 - MySQL 8
-- Redis
+- Redis（必须先启动，登录 token 存在这里）
+
+国内网络下 npm 安装慢，可以换镜像：
+
+```bash
+npm install --registry=https://registry.npmmirror.com
+```
 
 ### 2. 初始化数据库
 
@@ -178,7 +184,7 @@ accessKeySecret=你的AccessKeySecret
 
 设置 `OSS_ACCESS_KEY_ID` 和 `OSS_ACCESS_KEY_SECRET` 即可。
 
-两者都没有时，程序启动会抛出明确提示，不会静默失败。
+两者都没有时，程序仍可正常启动，登录、列表、编辑等功能不受影响；只有调用上传接口时会抛出明确提示：缺少 OSS 访问凭证。
 
 ## License
 
