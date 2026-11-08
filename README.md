@@ -142,9 +142,26 @@ npm run dev
 - 后端 `Article`、`User` 的 `createTime` / `updateTime` 未加 `@JsonFormat`，前端提交时必须剔除这两个字段，否则反序列化失败
 - 封面图保存的是 OSS 完整地址，浏览器直接访问；部分历史数据引用了已失效的第三方 OSS 地址，重新上传即可
 
-## 注意
+## 配置 OSS 凭证
 
-`demo/GongCheng1/src/main/java/org/example/gongcheng1/utils/AliOssUtil.java` 中是阿里云 OSS 的访问密钥。若要把本仓库公开，请先把密钥挪到环境变量或本地配置文件，并加入 `.gitignore`，避免泄露后被盗刷。
+`AliOssUtil` 不在代码里保存密钥，启动前需提供一对阿里云 AccessKey，二选一：
+
+**方式一：本地配置文件（推荐）**
+
+在 `demo/GongCheng1/src/main/resources/` 下新建 `oss.properties`：
+
+```properties
+accessKeyId=你的AccessKeyId
+accessKeySecret=你的AccessKeySecret
+```
+
+该文件已在 `.gitignore` 中排除，不会被提交。
+
+**方式二：环境变量**
+
+设置 `OSS_ACCESS_KEY_ID` 和 `OSS_ACCESS_KEY_SECRET` 即可。
+
+两者都没有时，程序启动会抛出明确提示，不会静默失败。
 
 ## License
 
